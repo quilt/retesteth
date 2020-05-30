@@ -9,6 +9,7 @@ extern const std::string default_Byzantium_config;
 extern const std::string default_Constantinople_config;
 extern const std::string default_ConstantinopleFix_config;
 extern const std::string default_Istanbul_config;
+extern const std::string default_Berlin_config;
 // t8ntool
 extern const std::string t8ntool_config;
 extern const std::string t8ntool_Frontier_config;
