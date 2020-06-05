@@ -111,10 +111,17 @@ public:
         SignatureStruct sigStruct;
         if (m_data.count("secretKey"))
         {
-            Signature sig = dev::sign(dev::Secret(m_data.atKey("secretKey").asString()), hash);
-            sigStruct = *(SignatureStruct const*)&sig;
-            ETH_FAIL_REQUIRE_MESSAGE(sigStruct.isValid(),
-                TestOutputHelper::get().testName() + " Could not construct transaction signature!");
+            if (m_data.atKey("secretKey").asString().compare("0xaa") != 0) {
+                Signature sig = dev::sign(dev::Secret(m_data.atKey("secretKey").asString()), hash);
+                sigStruct = *(SignatureStruct const*)&sig;
+                ETH_FAIL_REQUIRE_MESSAGE(sigStruct.isValid(),
+                                         TestOutputHelper::get().testName() + " Could not construct transaction signature!");
+            }
+            else
+            {
+                sigStruct = SignatureStruct();
+            }
+
         }
         else
         {
