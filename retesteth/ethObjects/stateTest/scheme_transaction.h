@@ -75,8 +75,8 @@ public:
             getSignedRLP(&sig);
             newData.removeKey("secretKey");
             newData["v"] = toCompactHexPrefixed(27 + int(sig.v));
-            newData["r"] = toCompactHexPrefixed(sig.r);
-            newData["s"] = toCompactHexPrefixed(sig.s);
+            newData["r"] = toCompactHexPrefixed(sig.r, 1);
+            newData["s"] = toCompactHexPrefixed(sig.s, 1);
         }
         return newData;
     }
@@ -111,15 +111,15 @@ public:
         SignatureStruct sigStruct;
         if (m_data.count("secretKey"))
         {
-            if (m_data.atKey("secretKey").asString().compare("0xaa") != 0) {
+            if (m_data.atKey("secretKey").asString().compare("0xaa") == 0) {
+                sigStruct = SignatureStruct(u256(0), u256(0), 0);
+            }
+            else
+            {
                 Signature sig = dev::sign(dev::Secret(m_data.atKey("secretKey").asString()), hash);
                 sigStruct = *(SignatureStruct const*)&sig;
                 ETH_FAIL_REQUIRE_MESSAGE(sigStruct.isValid(),
                                          TestOutputHelper::get().testName() + " Could not construct transaction signature!");
-            }
-            else
-            {
-                sigStruct = SignatureStruct();
             }
 
         }
