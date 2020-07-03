@@ -108,4 +108,5 @@ BOOST_AUTO_TEST_CASE(stTimeConsuming) {}
 BOOST_AUTO_TEST_CASE(stSLoadTest) {}
 BOOST_AUTO_TEST_CASE(stChainId) {}
 BOOST_AUTO_TEST_CASE(stSelfBalance) {}
+BOOST_AUTO_TEST_CASE(stAccountAbstraction) {}
 BOOST_AUTO_TEST_SUITE_END()
